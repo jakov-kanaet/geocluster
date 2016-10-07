@@ -31,15 +31,23 @@ def convert_lat_from_degrees(value):
     :param value: The longitude as a float
     :return: The longitude in GPS coordinate
     """
-    assert(isinstance(value, (int, float)))
+    # assert(isinstance(value, (int, float)))
+    #
+    # if value > 180:
+    #     raise ValueError("Lattitude in degrees can't be greater than 180")
+    # elif value < 0:
+    #     raise ValueError("Lattitude in degrees can't be lesser than 0")
+    #
+    # return value if value < 90 else 90 - value
 
-    if value > 180:
-        raise ValueError("Lattitude in degrees can't be greater than 180")
-    elif value < 0:
-        raise ValueError("Lattitude in degrees can't be lesser than 0")
+    value = value if value < 90 else 90 - value
 
-    return value if value < 90 else 90 - value
+    if value > 90:
+        raise ValueError("Lattitude in degrees can't be greater than 90")
+    elif value < -90:
+        raise ValueError("Lattitude in degrees can't be lesser than -90")
 
+    return value
 
 def convert_lng_from_degrees(value):
     """
@@ -49,9 +57,17 @@ def convert_lng_from_degrees(value):
     """
     assert(isinstance(value, (int, float)))
 
-    if value > 180:
-        raise ValueError("Lattitude in degrees can't be greater than 180")
-    elif value < 0:
-        raise ValueError("Lattitude in degrees can't be lesser than 0")
+    # if value > 180:
+    #     raise ValueError("Lattitude in degrees can't be greater than 180")
+    # elif value < 0:
+    #     raise ValueError("Lattitude in degrees can't be lesser than 0")
+    #
+    # return value if value < 180 else 180 - value
 
-    return value if value < 180 else 180 - value
+    value = value if value < 180 else 180 - value
+
+    if value > 180:
+        raise ValueError("Longitude in degrees can't be greater than 180")
+    elif value < -180:
+        raise ValueError("Longitude in degrees can't be lesser than -180")
+    return value
